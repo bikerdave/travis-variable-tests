@@ -1,10 +1,12 @@
 language: php
 
 script:
-  - BRANCH=$TRAVIS_BRANCH
-  - if [ ! -z "$TRAVIS_PULL_REQUEST_BRANCH" ]; then BRANCH=$TRAVIS_PULL_REQUEST_BRANCH; fi;
-  - echo "TRAVIS_BRANCH - ${TRAVIS_BRANCH}"
-  - echo "TRAVIS_PULL_REQUEST_BRANCH - ${TRAVIS_PULL_REQUEST_BRANCH}"
+  - |
+    if [ ! -z "$TRAVIS_PULL_REQUEST_BRANCH" ]; then
+      BRANCH=$TRAVIS_PULL_REQUEST_BRANCH
+    else
+      BRANCH=$TRAVIS_BRANCH
+    fi
   - echo "BRANCH - ${BRANCH}"
 
 after_success:
