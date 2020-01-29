@@ -1,5 +1,14 @@
 language: php
 
 script:
+  - BRANCH=$TRAVIS_BRANCH
+  - if [ ! -z "$TRAVIS_PULL_REQUEST_BRANCH" ]; then BRANCH=$TRAVIS_PULL_REQUEST_BRANCH; fi;
   - echo "TRAVIS_BRANCH - ${TRAVIS_BRANCH}"
   - echo "TRAVIS_PULL_REQUEST_BRANCH - ${TRAVIS_PULL_REQUEST_BRANCH}"
+  - echo "BRANCH - ${BRANCH}"
+
+after_success:
+  - | # Master or develop deploy
+    if test ${BRANCH} = "master"; then
+      echo "Run code"
+    fi
